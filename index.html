@@ -191,7 +191,7 @@
 
         <div class="z-10 relative">
             <h2 class="text-silver-300 tracking-widest text-lg md:text-xl mb-4 uppercase font-light">Counting Down To The Big Day</h2>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-12 animate-float font-serif">Birthday Countdown!</h1>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-12 animate-float font-serif">Brother's Birthday</h1>
 
             <!-- Countdown Timer -->
             <div class="grid grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto">
@@ -387,16 +387,10 @@
             let targetDate = new Date(currentYear, targetMonth, targetDay, 0, 0, 0); // Local time initially
             
             // Adjust to Myanmar Time (UTC+6:30)
-            // Strategy: Convert target to UTC, then subtract 6.5 hours to align? 
-            // Easier: Get target in UTC.
-            // A fixed string works best for specific timezones if browser support is good, 
-            // but manual calculation is safer.
-            
-            // Let's assume the user wants Jan 23 00:00 Myanmar Time.
-            // Myanmar is UTC + 6.5
-            // So Jan 23 00:00 MM = Jan 22 17:30 UTC.
-            
-            let birthdayDate = new Date(Date.UTC(currentYear, targetMonth, targetDay, -6, 30, 0)); // 00:00 - 6.5h = 17:30 prev day
+            // Myanmar Standard Time is UTC+06:30
+            // So 00:00 AM in Myanmar is 17:30 PM (previous day) in UTC.
+            // targetDay is 23, so we target Jan 22 at 17:30 UTC.
+            let birthdayDate = new Date(Date.UTC(currentYear, targetMonth, targetDay - 1, 17, 30, 0)); 
             
             // If birthday passed this year, look at next year
             if (now.getTime() > birthdayDate.getTime() + (24 * 60 * 60 * 1000)) { 
